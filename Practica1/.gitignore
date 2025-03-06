@@ -17,3 +17,8 @@ buildNumber.properties
 .classpath
 # Mac file
 .DS_Store
+
+
+.vscode
+.idea
+.settings
