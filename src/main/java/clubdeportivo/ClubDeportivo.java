@@ -40,6 +40,9 @@ public class ClubDeportivo {
 			anyadirActividad(g);
 		} catch (NumberFormatException e) {
 			throw new ClubException("ERROR: formato de número incorrecto");
+		} catch (ArrayIndexOutOfBoundsException e){ // ERROR: cuando introducia un String[] con un rango menor saltaba
+													// ArrayIndexOutOfBoundsException no controlado
+			throw new ClubException("ERROR: faltan datos del grupo");
 		}
 	}
 
