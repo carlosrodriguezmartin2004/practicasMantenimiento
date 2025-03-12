@@ -14,7 +14,7 @@ public class ClubDeportivoTest {
 
     @BeforeEach
     void setUp() throws ClubException {
-        ClubD = new ClubDeportivo("Club Deportivo 1");
+        ClubD = new ClubDeportivo("Club Deportivo 1", 4);
         g1 = new Grupo("1111", "Padel", 7, 5, 20.0);
         g2 = new Grupo("2222", "Tenis", 6, 6, 20.0);
         g3 = new Grupo("3333", "Futbol", 18, 18, 25.0);
@@ -64,8 +64,17 @@ public class ClubDeportivoTest {
         ClubD.anyadirActividad(g2);
         ClubD.anyadirActividad(g3);
         ClubD.anyadirActividad(g4);
-        ClubD.anyadirActividad(g5);
         ClubD.anyadirActividad(g3); //Volvemos a anyadir la actividad de g3
+    }
+
+    @Test
+    void AnyadirActividadCuandoNoCabenMas() throws ClubException {
+        ClubD.anyadirActividad(g1); //Anyadimos varias actividades al Club
+        ClubD.anyadirActividad(g2);
+        ClubD.anyadirActividad(g3);
+        ClubD.anyadirActividad(g4);
+        assertThrows(ClubException.class, () -> ClubD.anyadirActividad(g5));
+
     }
 
     @Test

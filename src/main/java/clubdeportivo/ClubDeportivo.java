@@ -51,12 +51,19 @@ public class ClubDeportivo {
 			throw new ClubException("ERROR: el grupo es nulo");
 		}
 		int pos = buscar(g);
-		if (pos == -1) { // El grupo es nuevo
-			grupos[ngrupos] = g;
-			ngrupos++;
-		} else { // El grupo ya existe --> modificamos las plazas
-			grupos[pos].actualizarPlazas(g.getPlazas());
-		}
+
+		try{
+			if (pos == -1) { // El grupo es nuevo
+				grupos[ngrupos] = g;
+				ngrupos++;
+			}else { // El grupo ya existe --> modificamos las plazas
+				grupos[pos].actualizarPlazas(g.getPlazas());
+			}
+		}catch (ArrayIndexOutOfBoundsException e){
+			throw new ClubException("ERROR: Se ha alcanzado el numero maximo de grupos");
+		} //ERROR: Cuando se intentaba introducir una actividad y no cabian mas no estaba controlado
+			// el error
+
 	}
 
 	public int plazasLibres(String actividad) {
