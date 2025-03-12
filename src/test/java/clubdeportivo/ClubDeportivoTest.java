@@ -14,6 +14,7 @@ public class ClubDeportivoTest {
 
     @BeforeEach
     void setUp() throws ClubException {
+        //Arrange
         ClubD = new ClubDeportivo("Club Deportivo 1", 4);
         g1 = new Grupo("1111", "Padel", 7, 5, 20.0);
         g2 = new Grupo("2222", "Tenis", 6, 6, 20.0);
@@ -24,7 +25,9 @@ public class ClubDeportivoTest {
 
     @Test
     void ClubDeportivoConGruposNegativos() {
-        assertThrows(ClubException.class,()->new ClubDeportivo("ClubPrueba", -1));
+        int n = -1;
+        String nombre = "ClubPrueba";
+        assertThrows(ClubException.class,()->new ClubDeportivo(nombre, n));
     }
 
     @Test
