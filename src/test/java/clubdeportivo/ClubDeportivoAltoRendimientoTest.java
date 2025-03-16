@@ -5,7 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.*;
 
 public class ClubDeportivoAltoRendimientoTest {
-        
+    private ClubDeportivoAltoRendimiento ClubD;
     @Test
     public void ClubDeportivoAltoRendimiento_valoresnegativos_returnClubException() throws ClubException {
         String nombre= "ClubErroneo";
@@ -123,5 +123,19 @@ public class ClubDeportivoAltoRendimientoTest {
     }
 
     //anyadirActividad
+    @Test
+    void AnyadirActividadDatosRangoMenor() throws ClubException {
+        ClubD = new ClubDeportivoAltoRendimiento("Club Deportivo 1", 10,2);
+        String[] datosRangoMenor = {"Club AntiDeportivo", "Waterpolo", "10", "8"};
+        assertThrows(ClubException.class, () -> ClubD.anyadirActividad(datosRangoMenor));
+    }
+
+    @Test
+    void AnyadirActividadDatosRangoMayor() throws ClubException {
+        ClubD = new ClubDeportivoAltoRendimiento("Club Deportivo 1", 10,2);
+        String[] datosRangoMayor = {"Club AntiDeportivo", "Waterpolo", "10", "8", "18.0", "RANGO MAYOR"};
+        assertDoesNotThrow(()-> ClubD.anyadirActividad(datosRangoMayor)); // No importa que el tamaño del String[] sea mayor al pedido
+
+    }
 
 }
