@@ -6,6 +6,9 @@ import org.junit.jupiter.api.*;
 
 public class ClubDeportivoAltoRendimientoTest {
     private ClubDeportivoAltoRendimiento ClubD;
+    private Grupo g1;
+    private Grupo g2;
+    private Grupo g3;
     @Test
     public void ClubDeportivoAltoRendimiento_valoresnegativos_returnClubException() throws ClubException {
         String nombre= "ClubErroneo";
@@ -180,13 +183,27 @@ public class ClubDeportivoAltoRendimientoTest {
     }
 
     @Test
-    public void IngresosTest() throws ClubException {
-        ClubD = new ClubDeportivoAltoRendimiento("Club Deportivo 1", 10,2);
-        double cantidad = 12;
+    @DisplayName("Calcular ingresos con grupos")
+    public void ingresos_ConGrupos() throws ClubException{
+        //Arrange: Preparamos los datos a usar
+        ClubDeportivoAltoRendimiento club = new ClubDeportivoAltoRendimiento("ClubD", 10, 2.0);
+        String[] datos = {"Waterpolo", "Wa", "10", "5", "10.0"};
+        double expected = 51.0;
+        club.anyadirActividad(datos);
+        double resultado = club.ingresos();
 
-        assertEquals(cantidad,ClubD.ingresos());
+        assertEquals(expected,resultado);
     }
 
+    @Test
+    public void ingresos_SinGrupos_returnCero() throws ClubException{
+
+        ClubDeportivoAltoRendimiento club = new ClubDeportivoAltoRendimiento("Club", 10, 2.0);
+        double expected = 0.0;
+
+        double result = club.ingresos();
+        assertEquals(result,expected);
+    }
 
 
 }
