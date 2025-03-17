@@ -179,6 +179,7 @@ public class ClubDeportivoTest {
         assertEquals(expected, actual);
     }
 
+
     @Test
     public void toStringTest() throws ClubException {
         ClubD.anyadirActividad(g1);
