@@ -16,7 +16,7 @@ public class ClubDeportivoAltoRendimiento extends ClubDeportivo{
 	
 	public ClubDeportivoAltoRendimiento(String nombre, int tam, int maximo, double incremento) throws ClubException {
 		super(nombre,tam);
-		if (maximo<=0 || incremento<=0) {
+		if (maximo<=0 || incremento<=0 || tam<=0) { //FIXED:cambio para tamaño 0 o negativo
 			throw new ClubException("ERRORES: valores 0 o negativos.");
 		}
 		maximoPersonasGrupo=maximo;

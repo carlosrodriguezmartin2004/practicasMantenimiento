@@ -184,7 +184,7 @@ public class ClubDeportivoAltoRendimientoTest {
 
     @Test
     @DisplayName("Calcular ingresos con grupos")
-    public void ingresos_ConGrupos() throws ClubException{
+    public void ingresos_ConGrupos_returnCorrecto() throws ClubException{
         //Arrange: Preparamos los datos a usar
         ClubDeportivoAltoRendimiento club = new ClubDeportivoAltoRendimiento("ClubD", 10, 2.0);
         String[] datos = {"Waterpolo", "Wa", "10", "5", "10.0"};
