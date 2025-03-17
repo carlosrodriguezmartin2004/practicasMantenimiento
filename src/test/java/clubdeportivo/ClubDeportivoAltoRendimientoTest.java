@@ -124,18 +124,69 @@ public class ClubDeportivoAltoRendimientoTest {
 
     //anyadirActividad
     @Test
-    void AnyadirActividadDatosRangoMenor() throws ClubException {
+    public void AnyadirActividadDatosRangoMenor() throws ClubException {
         ClubD = new ClubDeportivoAltoRendimiento("Club Deportivo 1", 10,2);
         String[] datosRangoMenor = {"Club AntiDeportivo", "Waterpolo", "10", "8"};
         assertThrows(ClubException.class, () -> ClubD.anyadirActividad(datosRangoMenor));
     }
 
     @Test
-    void AnyadirActividadDatosRangoMayor() throws ClubException {
+    public void AnyadirActividadDatosRangoMayor() throws ClubException {
         ClubD = new ClubDeportivoAltoRendimiento("Club Deportivo 1", 10,2);
         String[] datosRangoMayor = {"Club AntiDeportivo", "Waterpolo", "10", "8", "18.0", "RANGO MAYOR"};
         assertDoesNotThrow(()-> ClubD.anyadirActividad(datosRangoMayor)); // No importa que el tamaño del String[] sea mayor al pedido
 
     }
+
+    @Test
+    public void AnyadirActividadDatosPlazasMasDeLasMaximas_PlazasIgualAMaximasPersonasGrupo() throws ClubException {
+        String maximo = "10";
+        ClubD = new ClubDeportivoAltoRendimiento("Club Deportivo 1", 10,2);
+        String plazas = "15";
+        String matriculados = "5";
+        int plazaslibresesperadas = Integer.parseInt(maximo)-Integer.parseInt(matriculados);
+        String actividad ="Waterpolo";
+        String[] datosRangoMayor = {"Club AntiDeportivo", actividad, String.valueOf(plazas), matriculados, "18.0", "RANGO MAYOR"};
+        ClubD.anyadirActividad(datosRangoMayor);
+        assertEquals(plazaslibresesperadas,ClubD.plazasLibres(actividad)); // No importa que el tamaño del String[] sea mayor al pedido
+
+    }
+
+    @Test
+    public void AnyadirActividadDatosPlazasMenosDeLasMaximas_PlazasIgualAPlazasMenosMatriculadosPersonasGrupo() throws ClubException {
+        String maximo = "10";
+        ClubD = new ClubDeportivoAltoRendimiento("Club Deportivo 1", 10,2);
+        String plazas = "8";
+        String matriculados = "5";
+        int plazaslibresesperadas = Integer.parseInt(plazas)-Integer.parseInt(matriculados);
+        String actividad ="Waterpolo";
+        String[] datosRangoMayor = {"Club AntiDeportivo", actividad, String.valueOf(plazas), matriculados, "18.0", "RANGO MAYOR"};
+        ClubD.anyadirActividad(datosRangoMayor);
+        assertEquals(plazaslibresesperadas,ClubD.plazasLibres(actividad)); // No importa que el tamaño del String[] sea mayor al pedido
+
+    }
+
+    @Test
+    public void AnyadirActividadDatosFormatoNumeroIncorrecto_returnClubException() throws ClubException {
+        String maximo = "10";
+        ClubD = new ClubDeportivoAltoRendimiento("Club Deportivo 1", 10,2);
+        String plazas = "MAL";
+        String matriculados = "5";
+        int plazaslibresesperadas = Integer.parseInt(maximo)-Integer.parseInt(matriculados);
+        String actividad ="Waterpolo";
+        String[] datosConFormatoIncorrecto = {"Club AntiDeportivo", actividad, String.valueOf(plazas), matriculados, "18.0", "RANGO MAYOR"};
+        assertThrows(ClubException.class,() -> ClubD.anyadirActividad(datosConFormatoIncorrecto)); // No importa que el tamaño del String[] sea mayor al pedido
+
+    }
+
+    @Test
+    public void IngresosTest() throws ClubException {
+        ClubD = new ClubDeportivoAltoRendimiento("Club Deportivo 1", 10,2);
+        double cantidad = 12;
+
+        assertEquals(cantidad,ClubD.ingresos());
+    }
+
+
 
 }
