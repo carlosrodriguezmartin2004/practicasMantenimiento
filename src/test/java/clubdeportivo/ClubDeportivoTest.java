@@ -1,3 +1,9 @@
+/*
+    Carlos Rodriguez Martin
+    Jose Ruiz Pareja
+    Grupo Y
+*/
+
 package clubdeportivo;
 
 import static org.junit.jupiter.api.Assertions.*;
