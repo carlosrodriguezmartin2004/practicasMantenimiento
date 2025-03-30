@@ -1,86 +1,47 @@
 package org.mps.tree;
 
+import org.junit.jupiter.api.*;
+
 import java.util.Comparator;
 
-public class BinarySearchTreeTest<T> implements BinarySearchTreeStructure<T> {
-    private Comparator<T> comparator;
-    private T value;
-    private BinarySearchTreeTest<T> left;
-    private BinarySearchTreeTest<T> right;
+import static org.junit.jupiter.api.Assertions.*;
 
-    public String render(){
-        String render = "";
+public class BinarySearchTreeTest {
+    private BinarySearchTree<Integer> bst;
 
-        if (value != null) {
-            render += value.toString();
-        }
-
-        if (left != null || right != null) {
-            render += "(";
-            if (left != null) {
-                render += left.render();
-            }
-            render += ",";
-            if (right != null) {
-                render += right.render();
-            }
-            render += ")";
-        }
-
-        return render;
+    @BeforeEach
+    public void setUp(){
+        Comparator<Integer> comparator = Integer::compareTo;
+        bst = new BinarySearchTree<>(comparator);
+        bst.insert(30);
+        bst.insert(10);
+        bst.insert(20);
+        bst.insert(5);
+        bst.insert(40);
+        bst.insert(50);
+        bst.insert(35);
     }
 
-    public BinarySearchTreeTest(Comparator<T> comparator) {
-        // TODO
+
+
+    @Test
+    public void renderTest(){
+        String expected = "30(10(5,20),40(35,50))";
+
+        Comparator<Integer> comparator = Integer::compareTo;
+        BinarySearchTree<Integer> bst2 = new BinarySearchTree<>(comparator);
+        bst2.insert(30);
+        bst2.insert(10);
+        bst2.insert(20);
+        bst2.insert(5);
+        bst2.insert(40);
+        bst2.insert(50);
+        bst2.insert(35);
+
+        String actual = bst2.render();
+        assertEquals(expected, actual);
     }
 
-    @Override
-    public void insert(T value) {
-        // TODO
-    }
 
-    @Override
-    public boolean isLeaf() {
-        // TODO
-        return false;
-    }
 
-    @Override
-    public boolean contains(T value) {
-        // TODO
-        return false;
-    }
-
-    @Override
-    public T minimum() {
-        // TODO
-        return null;
-    }
-
-    @Override
-    public T maximum() {
-        // TODO
-        return null;
-    }
-
-    @Override
-    public void removeBranch(T value){
-        // TODO
-    }
-
-    @Override
-    public int size() {
-        //TODO
-        return 0;
-    }
-
-    @Override
-    public int depth() {
-        // TODO
-        return 0;
-    }
-
-    // Complex operations
-    // (Estas operaciones se incluirán más adelante para ser realizadas en la segunda
-    // sesión de laboratorio de esta práctica)
 }
