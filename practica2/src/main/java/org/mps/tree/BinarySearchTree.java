@@ -73,6 +73,10 @@ public class BinarySearchTree<T> implements BinarySearchTreeStructure<T> {
     public boolean contains(T value) {
         boolean loEs = false;
 
+        if(this.value == null){
+            throw new BinarySearchTreeException("Arbol nulo");
+        }
+
         if(value == null){
             throw new BinarySearchTreeException("Valor a buscar nulo");
         }
@@ -93,7 +97,7 @@ public class BinarySearchTree<T> implements BinarySearchTreeStructure<T> {
         T minimo;
 
         if(this.value == null){
-            throw new BinarySearchTreeException("Arbol vacío");
+            throw new BinarySearchTreeException("Arbol vacio");
         }
 
         if(this.left != null){
@@ -112,7 +116,7 @@ public class BinarySearchTree<T> implements BinarySearchTreeStructure<T> {
         T maximo;
 
         if(this.value == null){
-            throw new BinarySearchTreeException("Arbol vacío");
+            throw new BinarySearchTreeException("Arbol vacio");
         }
 
         if(this.right != null){
@@ -137,7 +141,7 @@ public class BinarySearchTree<T> implements BinarySearchTreeStructure<T> {
 
         }else if(this.comparator.compare(this.value, value) < 0){
             this.right.removeBranch(value);
-        }else if(this.comparator.compare(this.value, value) > 0){
+        }else{
             this.left.removeBranch(value);
         }
     }
