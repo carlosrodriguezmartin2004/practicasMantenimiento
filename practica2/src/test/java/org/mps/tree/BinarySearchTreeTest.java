@@ -11,6 +11,8 @@ public class BinarySearchTreeTest {
     @Nested
     @DisplayName("render")
     class Render {
+        @Test
+        @DisplayName("insertar 7 valores correctamente")
         public void renderSoloInserts(){
             String expected = "30(10(5,20),40(35,50))";
 
@@ -30,6 +32,7 @@ public class BinarySearchTreeTest {
         }
 
         @Test
+        @DisplayName("render de un arbol vacio")
         public void renderArbolVacio(){
             String expected = "";
 
@@ -41,6 +44,7 @@ public class BinarySearchTreeTest {
         }
 
         @Test
+        @DisplayName("render de un arbol sin hijos")
         public void renderArbolSinHijos(){
             String expected = "30";
 
@@ -54,6 +58,7 @@ public class BinarySearchTreeTest {
         }
 
         @Test
+        @DisplayName("render de un arbol con solo hijo izquierdo")
         public void renderArbolConSoloHijoIzquierdo(){
             String expected = "30(10,)";
 
@@ -68,6 +73,7 @@ public class BinarySearchTreeTest {
         }
 
         @Test
+        @DisplayName("render de un arbol con solo hijo derecho")
         public void renderArbolConSoloHijoDerecho(){
             String expected = "30(,50)";
 
@@ -86,6 +92,7 @@ public class BinarySearchTreeTest {
     @DisplayName("insert")
         class Insert{
             @Test
+            @DisplayName("insertar un valor nulo")
             public void insertValorNulo(){
                 Comparator<Integer> comparator = Integer::compareTo;
                 BinarySearchTree<Integer> bst2 = new BinarySearchTree<>(comparator);
@@ -100,6 +107,7 @@ public class BinarySearchTreeTest {
             }
 
             @Test
+            @DisplayName("insertar en un arbol vacio")
             public void insertEnArbolVacio(){
                 Comparator<Integer> comparator = Integer::compareTo;
                 BinarySearchTree<Integer> bst2 = new BinarySearchTree<>(comparator);
@@ -115,6 +123,7 @@ public class BinarySearchTreeTest {
             }
 
             @Test
+            @DisplayName("insertar dos veces el mismo valor")
             public void insertDosVecesMismoValor(){
                 Comparator<Integer> comparator = Integer::compareTo;
                 BinarySearchTree<Integer> bst2 = new BinarySearchTree<>(comparator);
@@ -132,6 +141,7 @@ public class BinarySearchTreeTest {
             }
 
             @Test
+            @DisplayName("insertar en la derecha")
             public void insertDerecha(){
                 Comparator<Integer> comparator = Integer::compareTo;
                 BinarySearchTree<Integer> bst2 = new BinarySearchTree<>(comparator);
@@ -148,6 +158,7 @@ public class BinarySearchTreeTest {
             }
 
             @Test
+            @DisplayName("insertar a la izquierda")
             public void insertIzquierda(){
                 Comparator<Integer> comparator = Integer::compareTo;
                 BinarySearchTree<Integer> bst2 = new BinarySearchTree<>(comparator);
@@ -163,6 +174,7 @@ public class BinarySearchTreeTest {
             }
 
             @Test
+            @DisplayName("insertar tercera fila a la izquierda")
             public void insertTerceraFilaIzquierda(){
                 Comparator<Integer> comparator = Integer::compareTo;
                 BinarySearchTree<Integer> bst2 = new BinarySearchTree<>(comparator);
@@ -179,6 +191,7 @@ public class BinarySearchTreeTest {
             }
 
             @Test
+            @DisplayName("insertar tercera fila a la derecha")
             public void insertTerceraFilaDerecha(){
                 Comparator<Integer> comparator = Integer::compareTo;
                 BinarySearchTree<Integer> bst2 = new BinarySearchTree<>(comparator);
@@ -200,6 +213,7 @@ public class BinarySearchTreeTest {
     @DisplayName("isLeaf")
     class isLeaf{
         @Test
+        @DisplayName("comprobar que es hoja en arbol vacio")
         public void isLeafArbolVacio(){
             Comparator<Integer> comparator = Integer::compareTo;
             BinarySearchTree<Integer> bst2 = new BinarySearchTree<>(comparator);
@@ -214,6 +228,7 @@ public class BinarySearchTreeTest {
         }
 
         @Test
+        @DisplayName("comprobar que es hoja en arbol con hijo a la izquierda")
         public void isLeafArbolConHijoIzquierdo(){
             Comparator<Integer> comparator = Integer::compareTo;
             BinarySearchTree<Integer> bst2 = new BinarySearchTree<>(comparator);
@@ -229,6 +244,7 @@ public class BinarySearchTreeTest {
         }
 
         @Test
+        @DisplayName("comprobar que es hoja en arbol con hijo a la derecha")
         public void isLeafArbolConHijoDerecho(){
             Comparator<Integer> comparator = Integer::compareTo;
             BinarySearchTree<Integer> bst2 = new BinarySearchTree<>(comparator);
@@ -244,6 +260,7 @@ public class BinarySearchTreeTest {
         }
 
         @Test
+        @DisplayName("comprobar que es hoja en arbol con dos hijos")
         public void isLeafArbolConDosHijos(){
             Comparator<Integer> comparator = Integer::compareTo;
             BinarySearchTree<Integer> bst2 = new BinarySearchTree<>(comparator);
@@ -260,6 +277,7 @@ public class BinarySearchTreeTest {
         }
 
         @Test
+        @DisplayName("comprobar que es hoja en arbol sin hijos")
         public void isLeafArbolSinHijos(){
             Comparator<Integer> comparator = Integer::compareTo;
             BinarySearchTree<Integer> bst2 = new BinarySearchTree<>(comparator);
@@ -279,6 +297,7 @@ public class BinarySearchTreeTest {
     @DisplayName("contains")
     class contains{
         @Test
+        @DisplayName("busca si contiene en un arbol un valor nulo")
         public void containsValorNulo(){
             Comparator<Integer> comparator = Integer::compareTo;
             BinarySearchTree<Integer> bst2 = new BinarySearchTree<>(comparator);
@@ -302,6 +321,7 @@ public class BinarySearchTreeTest {
         }
 
         @Test
+        @DisplayName("busca si contiene en un arbol nulo un valor")
         public void containsArbolNulo(){
             Comparator<Integer> comparator = Integer::compareTo;
             BinarySearchTree<Integer> bst2 = new BinarySearchTree<>(comparator);
@@ -319,7 +339,8 @@ public class BinarySearchTreeTest {
         }
 
         @Test
-        public void containsValoQueExiste(){
+        @DisplayName("busca si contiene en un arbol un valor que existe")
+        public void containsValorQueExiste(){
             Comparator<Integer> comparator = Integer::compareTo;
             BinarySearchTree<Integer> bst2 = new BinarySearchTree<>(comparator);
 
@@ -340,6 +361,7 @@ public class BinarySearchTreeTest {
         }
 
         @Test
+        @DisplayName("busca si contiene en un arbol un valor que no existe a la izquierda")
         public void containsValorQueNOExisteALaIzquierda(){
             Comparator<Integer> comparator = Integer::compareTo;
             BinarySearchTree<Integer> bst2 = new BinarySearchTree<>(comparator);
@@ -361,6 +383,7 @@ public class BinarySearchTreeTest {
         }
 
         @Test
+        @DisplayName("busca si contiene en un arbol un valor que no existe a la derecha")
         public void containsValorQueNOExisteALaDerecha(){
             Comparator<Integer> comparator = Integer::compareTo;
             BinarySearchTree<Integer> bst2 = new BinarySearchTree<>(comparator);
@@ -385,7 +408,10 @@ public class BinarySearchTreeTest {
     @Nested
     @DisplayName("minimum")
     class minimum{
+
+
         @Test
+        @DisplayName("busca el valor minimo en un arbol vacio")
         public void minimoDeArbolVacio(){
             Comparator<Integer> comparator = Integer::compareTo;
             BinarySearchTree<Integer> bst2 = new BinarySearchTree<>(comparator);
@@ -403,6 +429,7 @@ public class BinarySearchTreeTest {
         }
 
         @Test
+        @DisplayName("busca el valor minimo en un arbol bien hecho")
         public void minimoDeArbolBienHecho(){
             Comparator<Integer> comparator = Integer::compareTo;
             BinarySearchTree<Integer> bst2 = new BinarySearchTree<>(comparator);
@@ -432,6 +459,7 @@ public class BinarySearchTreeTest {
 @DisplayName("maximum")
 class maximum{
     @Test
+    @DisplayName("busca el valor maximo en un arbol vacio")
     public void maximoDeArbolVacio(){
         Comparator<Integer> comparator = Integer::compareTo;
         BinarySearchTree<Integer> bst2 = new BinarySearchTree<>(comparator);
@@ -449,6 +477,7 @@ class maximum{
     }
 
     @Test
+    @DisplayName("busca el valor maximo en un arbol bien hecho")
     public void maximoDeArbolBienHecho(){
         Comparator<Integer> comparator = Integer::compareTo;
         BinarySearchTree<Integer> bst2 = new BinarySearchTree<>(comparator);
@@ -478,6 +507,7 @@ class maximum{
     @DisplayName("removeBranch")
     class removeBranch{
         @Test
+        @DisplayName("elimina un valor nulo de un arbol")
         public void removeBranchValorNulo(){
             Comparator<Integer> comparator = Integer::compareTo;
             BinarySearchTree<Integer> bst2 = new BinarySearchTree<>(comparator);
@@ -492,6 +522,7 @@ class maximum{
         }
 
         @Test
+        @DisplayName("elimina un valor en un arbol menor que el primer valor pero mayor que el segundo")
         public void removeBranchValorLaIzquierdaLuegoDerecha(){
             Comparator<Integer> comparator = Integer::compareTo;
             BinarySearchTree<Integer> bst2 = new BinarySearchTree<>(comparator);
@@ -522,6 +553,7 @@ class maximum{
     @DisplayName("size")
     class size{
         @Test
+        @DisplayName("el tamaño de un arbol vacio")
         public void sizeArbolVacio(){
             Comparator<Integer> comparator = Integer::compareTo;
             BinarySearchTree<Integer> bst2 = new BinarySearchTree<>(comparator);
@@ -538,6 +570,7 @@ class maximum{
 
 
         @Test
+        @DisplayName("el tamaño de un arbol bien hecho")
         public void sizeArbolBienHecho(){
             Comparator<Integer> comparator = Integer::compareTo;
             BinarySearchTree<Integer> bst2 = new BinarySearchTree<>(comparator);
@@ -569,6 +602,7 @@ class maximum{
     @DisplayName("depth")
     class depth{
         @Test
+        @DisplayName("la profundidad de un arbol vacio")
         public void depthArbolVacio(){
             Comparator<Integer> comparator = Integer::compareTo;
             BinarySearchTree<Integer> bst2 = new BinarySearchTree<>(comparator);
@@ -585,6 +619,7 @@ class maximum{
 
 
         @Test
+        @DisplayName("la profundidad de un arbol bien hecho")
         public void depthArbolBienHecho(){
             Comparator<Integer> comparator = Integer::compareTo;
             BinarySearchTree<Integer> bst2 = new BinarySearchTree<>(comparator);
