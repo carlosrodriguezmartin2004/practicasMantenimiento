@@ -193,17 +193,82 @@ public class BinarySearchTree<T> implements BinarySearchTreeStructure<T> {
 
     @Override
     public void removeValue(T value) {
+        if (value == null) {
+            throw new BinarySearchTreeException("Valor a eliminar nulo");
+        }
 
+        if (this.value == null) {
+            throw new BinarySearchTreeException("Árbol vacío");
+        }
+        //para encontrar donde esta el valor a eliminar
+        int cmp = this.comparator.compare(value, this.value);
+
+        if (cmp < 0 && this.left != null) {
+            this.left.removeValue(value);
+        } else if (cmp > 0 && this.right != null) {
+            this.right.removeValue(value);
+        } else if (cmp == 0) {
+            // Caso 1: Nodo sin hijos solo lo borra
+            if (this.left == null && this.right == null) {
+                this.value = null;
+            }
+            // Caso 2: Nodo con un solo hijo se reemplaza por él
+            else if (this.left == null) {
+                this.value = this.right.value;
+                this.left = this.right.left;
+                this.right = this.right.right;
+            } else if (this.right == null) {
+                this.value = this.left.value;
+                this.right = this.left.right;
+                this.left = this.left.left;
+            }
+            // Caso 3: Nodo con dos hijos reemplaza su valor con el menor del subárbol derecho y lo elimina de su posición
+            else {
+                T minRightSubtree = this.right.minimum();
+                this.value = minRightSubtree;
+                this.right.removeValue(minRightSubtree);
+            }
+        }
     }
 
     @Override
     public List<T> inOrder() {
-        return List.of();
+        List<T> result = new ArrayList<>();
+        //siempre voy rellenando con la izquierda en el caso que haya
+        if (this.left != null) {
+            result.addAll(this.left.inOrder());
+        }
+        //añado el valor de la fila mas alta porque a partir de aqui seran los de su derecha
+        if (this.value != null) {
+            result.add(this.value);
+        }
+        //voy añadiendo los de la derecha como ultima opcion
+        if (this.right != null) {
+            result.addAll(this.right.inOrder());
+        }
+
+        return result;
     }
 
     @Override
     public void balance() {
+        List<T> valores_ordenados = inOrder();
+        this.value = null;
+        this.left = null;
+        this.right = null;
+        //vacio el arbol para que al volver a ordenarlo pueda ir añadiendolo
+        //obtengo la lista de valores ordenados y llamo a un metodo auxiliar para que vaya creando las ramas
+        insertarBalanced(valores_ordenados, 0, valores_ordenados.size() - 1);
+    }
 
+    private void insertarBalanced(List<T> valores_ordenados, int inicio, int ultimo) {
+        if (inicio > ultimo) return;//si el inicio es más alto que el final no puede existir
+
+        int mid = (inicio + ultimo) / 2;            //mid sera la mitad de la lista de los valores ordenados
+        insert(valores_ordenados.get(mid));         //añado el valor de enmedio y en "insert()" ya lo ordena
+
+        insertarBalanced(valores_ordenados, inicio, mid - 1);           //lo mismo con la parte de la izquierda de la lista
+        insertarBalanced(valores_ordenados, mid + 1, ultimo);           //lo mismo con la parte de la derecha de la lista
     }
 
 
