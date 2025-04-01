@@ -10,7 +10,7 @@ public class BinarySearchTree<T> implements BinarySearchTreeStructure<T> {
     private BinarySearchTree<T> left;
     private BinarySearchTree<T> right;
 
-    public String render(){
+    public String render() {
         String render = "";
 
         if (value != null) {
@@ -33,28 +33,28 @@ public class BinarySearchTree<T> implements BinarySearchTreeStructure<T> {
     }
 
     public BinarySearchTree(Comparator<T> comparator) {
-            this.comparator = comparator;
-            value = null;
-            left = null;
-            right = null;
+        this.comparator = comparator;
+        value = null;
+        left = null;
+        right = null;
 
     }
 
     @Override
     public void insert(T value) {
-        if(value == null){
+        if (value == null) {
             throw new BinarySearchTreeException("Valor nulo");
         }
 
-        if(this.value == null){
+        if (this.value == null) {
             this.value = value;
         } else if (this.comparator.compare(this.value, value) < 0) { // Si es mayor
-            if(this.right == null){
+            if (this.right == null) {
                 this.right = new BinarySearchTree<>(this.comparator);
             }
             this.right.insert(value);
-        }else if(this.comparator.compare(this.value, value) > 0){
-            if(this.left == null){
+        } else if (this.comparator.compare(this.value, value) > 0) {
+            if (this.left == null) {
                 this.left = new BinarySearchTree<>(this.comparator);
             }
             this.left.insert(value);
@@ -63,7 +63,7 @@ public class BinarySearchTree<T> implements BinarySearchTreeStructure<T> {
 
     @Override
     public boolean isLeaf() {
-        if(this.value == null){
+        if (this.value == null) {
             throw new BinarySearchTreeException("Valor nulo");
         }
         return this.left == null && this.right == null;
@@ -73,19 +73,19 @@ public class BinarySearchTree<T> implements BinarySearchTreeStructure<T> {
     public boolean contains(T value) {
         boolean loEs = false;
 
-        if(this.value == null){
+        if (this.value == null) {
             throw new BinarySearchTreeException("Arbol nulo");
         }
 
-        if(value == null){
+        if (value == null) {
             throw new BinarySearchTreeException("Valor a buscar nulo");
         }
 
-        if(this.comparator.compare(this.value, value) == 0){
+        if (this.comparator.compare(this.value, value) == 0) {
             loEs = true;
-        }else if(this.comparator.compare(this.value, value) < 0 && this.right != null){
+        } else if (this.comparator.compare(this.value, value) < 0 && this.right != null) {
             loEs = this.right.contains(value);
-        }else if(this.comparator.compare(this.value, value) > 0 && this.left != null){
+        } else if (this.comparator.compare(this.value, value) > 0 && this.left != null) {
             loEs = this.left.contains(value);
         }
 
@@ -96,16 +96,15 @@ public class BinarySearchTree<T> implements BinarySearchTreeStructure<T> {
     public T minimum() {
         T minimo;
 
-        if(this.value == null){
+        if (this.value == null) {
             throw new BinarySearchTreeException("Arbol vacio");
         }
 
-        if(this.left != null){
+        if (this.left != null) {
             minimo = this.left.minimum();
-        }else{
+        } else {
             minimo = this.value;
         }
-
 
 
         return minimo;
@@ -115,33 +114,33 @@ public class BinarySearchTree<T> implements BinarySearchTreeStructure<T> {
     public T maximum() {
         T maximo;
 
-        if(this.value == null){
+        if (this.value == null) {
             throw new BinarySearchTreeException("Arbol vacio");
         }
 
-        if(this.right != null){
+        if (this.right != null) {
             maximo = this.right.maximum();
-        }else{
+        } else {
             maximo = this.value;
         }
         return maximo;
     }
 
     @Override
-    public void removeBranch(T value){
+    public void removeBranch(T value) {
 
-        if(value == null){
+        if (value == null) {
             throw new BinarySearchTreeException("Valor a buscar nulo");
         }
 
-        if(this.comparator.compare(this.value, value) == 0){
+        if (this.comparator.compare(this.value, value) == 0) {
             this.left = null;
             this.right = null;
             this.value = null;
 
-        }else if(this.comparator.compare(this.value, value) < 0){
+        } else if (this.comparator.compare(this.value, value) < 0) {
             this.right.removeBranch(value);
-        }else{
+        } else {
             this.left.removeBranch(value);
         }
     }
@@ -150,16 +149,16 @@ public class BinarySearchTree<T> implements BinarySearchTreeStructure<T> {
     public int size() {
 
 
-        if(this.value == null){
+        if (this.value == null) {
             return 0;
         }
         int i = 1;
 
-        if(this.left != null){
+        if (this.left != null) {
             i += this.left.size();
         }
 
-        if(this.right != null){
+        if (this.right != null) {
             i += this.right.size();
         }
         return i;
@@ -168,7 +167,7 @@ public class BinarySearchTree<T> implements BinarySearchTreeStructure<T> {
     @Override
     public int depth() {
 
-        if(this.value == null){
+        if (this.value == null) {
             return 0;
         }
 
@@ -176,11 +175,11 @@ public class BinarySearchTree<T> implements BinarySearchTreeStructure<T> {
         int j = 1;
 
 
-        if(this.left != null){
-            i+=this.left.depth();
+        if (this.left != null) {
+            i += this.left.depth();
         }
 
-        if(this.right != null){
+        if (this.right != null) {
             j += this.right.depth();
         }
 
