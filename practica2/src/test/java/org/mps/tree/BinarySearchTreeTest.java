@@ -714,7 +714,7 @@ public class BinarySearchTreeTest {
             bst2.insert(valor1);
             bst2.insert(valor2);
             bst2.insert(valor3);
-            String expected = "5(,10(,))";
+            String expected = "5(,10)";
 
             bst2.removeValue(valor3);
             String actual = bst2.render();

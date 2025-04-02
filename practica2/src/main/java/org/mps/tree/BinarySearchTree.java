@@ -207,11 +207,8 @@ public class BinarySearchTree<T> implements BinarySearchTreeStructure<T> {
         //para encontrar donde esta el valor a eliminar
         int cmp = this.comparator.compare(value, this.value);
 
-        if (cmp < 0 && this.left != null) {
-            this.left.removeValue(value);
-        } else if (cmp > 0 && this.right != null) {
-            this.right.removeValue(value);
-        } else if (cmp == 0) {
+
+        if (cmp == 0) {
             // Caso 1: Nodo sin hijos solo lo borra
             if (this.left == null && this.right == null) {
                 this.value = null;
@@ -233,6 +230,28 @@ public class BinarySearchTree<T> implements BinarySearchTreeStructure<T> {
                 this.right.removeValue(minRightSubtree);
             }
         }
+
+        if (cmp < 0 && this.left != null) {
+
+            BinarySearchTree<T> i = this.left;
+            if (this.left.comparator.compare(this.left.value, value) == 0) {
+                this.left = null;
+            }
+
+            i.removeValue(value);
+
+
+        } else if (cmp > 0 && this.right != null) {
+            BinarySearchTree<T> i = this.right;
+
+            if (this.right.comparator.compare(this.right.value, value) == 0) {
+                this.right = null;
+            }
+
+            i.removeValue(value);
+        }
+
+
     }
 
     @Override
