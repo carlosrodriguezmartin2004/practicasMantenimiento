@@ -4,6 +4,8 @@ package org.mps.ronqi2;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.mps.dispositivo.Dispositivo;
 import org.mps.dispositivo.DispositivoSilver;
 
@@ -295,4 +297,105 @@ public class ronQI2Silvertest {
             rqs.obtenerNuevaLectura();
         }
     }
+
+
+    ////////////////////////////////////////////////////////////////////////////////
+
+    @ParameterizedTest
+    @ValueSource(ints = {4, 5, 10})
+    @DisplayName("Evaluar apnea: valores por debajo de umbral, independientemente del número de lecturas")
+    void evaluarApnea_NoApneaDistintasLecturas(int numLecturas) {
+        Dispositivo dispositivoMock = mock(DispositivoSilver.class);
+        when(dispositivoMock.leerSensorPresion()).thenReturn(10.0f);
+        when(dispositivoMock.leerSensorSonido()).thenReturn(10.0f);
+        rqs.anyadirDispositivo(dispositivoMock);
+
+        for (int i = 0; i < numLecturas; i++) {
+            rqs.obtenerNuevaLectura();
+        }
+
+        boolean resultado = rqs.evaluarApneaSuenyo();
+        assertFalse(resultado);
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {4, 5, 10})
+    @DisplayName("Evaluar apnea: valores por encima del umbral, distintas lecturas")
+    void evaluarApnea_ConApneaDistintasLecturas(int numLecturas) {
+        Dispositivo dispositivoMock = mock(DispositivoSilver.class);
+        when(dispositivoMock.leerSensorPresion()).thenReturn(25.0f);
+        when(dispositivoMock.leerSensorSonido()).thenReturn(35.0f);
+        rqs.anyadirDispositivo(dispositivoMock);
+
+        for (int i = 0; i < numLecturas; i++) {
+            rqs.obtenerNuevaLectura();
+        }
+
+        boolean resultado = rqs.evaluarApneaSuenyo();
+        assertTrue(resultado);
+    }
+
+
+
+    @Test
+    @DisplayName("Evaluar apnea: presión en umbral, sonido justo por debajo")
+    void evaluarApnea_JustoBajoSonido() {
+        Dispositivo dispositivoMock = mock(DispositivoSilver.class);
+        rqs.anyadirDispositivo(dispositivoMock);
+        when(dispositivoMock.leerSensorPresion()).thenReturn(20.0f);
+        when(dispositivoMock.leerSensorSonido()).thenReturn(29.9f);
+
+        for (int i = 0; i < 5; i++) {
+            rqs.obtenerNuevaLectura();
+        }
+
+        assertFalse(rqs.evaluarApneaSuenyo());
+    }
+
+    @Test
+    @DisplayName("Evaluar apnea: sonido en umbral, presión justo por debajo")
+    void evaluarApnea_JustoBajoPresion() {
+        Dispositivo dispositivoMock = mock(DispositivoSilver.class);
+        rqs.anyadirDispositivo(dispositivoMock);
+        when(dispositivoMock.leerSensorPresion()).thenReturn(19.9f);
+        when(dispositivoMock.leerSensorSonido()).thenReturn(30.0f);
+
+        for (int i = 0; i < 5; i++) {
+            rqs.obtenerNuevaLectura();
+        }
+
+        assertFalse(rqs.evaluarApneaSuenyo());
+    }
+
+    @Test
+    @DisplayName("Evaluar apnea: ambos justo en el umbral (20.0 / 30.1) → debe detectar apnea")
+    void evaluarApnea_ExactamenteEnElUmbral() {
+        Dispositivo dispositivoMock = mock(DispositivoSilver.class);
+        rqs.anyadirDispositivo(dispositivoMock);
+        when(dispositivoMock.leerSensorPresion()).thenReturn(20.0f);
+        when(dispositivoMock.leerSensorSonido()).thenReturn(30.1f);
+
+        for (int i = 0; i < 5; i++) {
+            rqs.obtenerNuevaLectura();
+        }
+
+        assertTrue(rqs.evaluarApneaSuenyo());
+    }
+
+
+
+    @Test
+    @DisplayName("Evaluar apnea: lectura  vacia → return false")
+    void evaluarApnea_LecturaVacia() {
+        DispositivoSilver dispositivoMock = mock(DispositivoSilver.class);
+        when(dispositivoMock.estaConectado()).thenReturn(true);
+
+        rqs.anyadirDispositivo(dispositivoMock);
+
+
+        boolean apnea = rqs.evaluarApneaSuenyo();
+
+        assertFalse(apnea);
+    }
+
 }
