@@ -1,3 +1,8 @@
+/*
+    Carlos Rodriguez Martin
+    Jose Ruiz Pareja
+    Grupo Y
+*/
 package org.mps.dispositivo;
 public class DispositivoSilver extends Dispositivo{
     

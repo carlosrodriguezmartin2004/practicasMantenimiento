@@ -1,5 +1,10 @@
 package org.mps.ronqi2;
 
+/*
+    Carlos Rodriguez Martin
+    Jose Ruiz Pareja
+    Grupo Y
+*/
 import java.util.ArrayList;
 import java.util.List;
 
