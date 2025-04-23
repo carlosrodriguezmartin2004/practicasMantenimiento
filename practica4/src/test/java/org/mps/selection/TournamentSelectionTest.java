@@ -1,9 +1,8 @@
-package org.mps;
+package org.mps.selection;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.internal.matchers.Null;
-import org.mps.selection.TournamentSelection;
+import org.mps.EvolutionaryAlgorithmException;
 
 
 import static org.junit.jupiter.api.Assertions.*;
