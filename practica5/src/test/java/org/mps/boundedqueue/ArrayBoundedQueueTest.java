@@ -6,6 +6,9 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 import static org.assertj.core.api.Assertions.*;
 
 public class ArrayBoundedQueueTest {
@@ -194,6 +197,91 @@ public class ArrayBoundedQueueTest {
 
             assertThat(last).isEqualTo(expected);
         }
+    }
+
+
+    @Nested
+    public class iterator{
+
+        @Test
+        @DisplayName("b")
+        public void Constructor_Correcto(){
+            int cap = 3;
+            ArrayBoundedQueue<Integer> arrayBoundedQueue = new ArrayBoundedQueue<>(cap);
+
+            Iterator<Integer> it = arrayBoundedQueue.iterator();
+
+            assertThat(it).isNotNull();
+        }
+
+        @Test
+        @DisplayName("b")
+        public void hasNext_ArrayVacio_false(){
+            int cap = 3;
+            ArrayBoundedQueue<Integer> arrayBoundedQueue = new ArrayBoundedQueue<>(cap);
+
+            Iterator<Integer> it = arrayBoundedQueue.iterator();
+
+            assertThat(it.hasNext()).isFalse();
+        }
+
+        @Test
+        @DisplayName("b")
+        public void hasNext_ArrayConElementos_true(){
+            int cap = 3;
+            int val1 = 5;
+            ArrayBoundedQueue<Integer> arrayBoundedQueue = new ArrayBoundedQueue<>(cap);
+            arrayBoundedQueue.put(val1);
+
+            Iterator<Integer> it = arrayBoundedQueue.iterator();
+
+            assertThat(it.hasNext()).isTrue();
+        }
+
+        @Test
+        @DisplayName("b")
+        public void Next_ArrayVacio_NoSuchElementException(){
+            int cap = 3;
+            ArrayBoundedQueue<Integer> arrayBoundedQueue = new ArrayBoundedQueue<>(cap);
+
+            Iterator<Integer> it = arrayBoundedQueue.iterator();
+
+            assertThat(arrayBoundedQueue).isEmpty();
+            assertThatThrownBy(() -> it.next()).isInstanceOf(NoSuchElementException.class).hasMessage("next: bounded queue iterator exhausted");
+        }
+
+        @Test
+        @DisplayName("b")
+        public void Next_ArrayConElementosNoLleno_Correcto(){
+            int cap = 3;
+            int val1 = 5;
+            int val2 = 10;
+            ArrayBoundedQueue<Integer> arrayBoundedQueue = new ArrayBoundedQueue<>(cap);
+            arrayBoundedQueue.put(val1);
+            arrayBoundedQueue.put(val2);
+
+
+            Iterator<Integer> it = arrayBoundedQueue.iterator();
+
+            assertThat(it.hasNext()).isTrue();
+
+            assertThat(it.next()).isEqualTo(val1);
+
+            assertThat(it.hasNext()).isTrue();
+
+            assertThat(it.next()).isEqualTo(val2);
+
+            assertThat(it.hasNext()).isFalse();
+
+            assertThatThrownBy(() -> it.next()).isInstanceOf(NoSuchElementException.class).hasMessage("next: bounded queue iterator exhausted");
+
+
+
+
+        }
+
+
+
     }
 
 
