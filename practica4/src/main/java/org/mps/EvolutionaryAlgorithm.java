@@ -1,7 +1,13 @@
+/*
+    Carlos Rodriguez Martin
+    Jose Ruiz Pareja
+    Grupo Y
+*/
 package org.mps;
 
 import org.mps.crossover.CrossoverOperator;
 import org.mps.mutation.MutationOperator;
+
 import org.mps.selection.SelectionOperator;
 
 /**
@@ -34,7 +40,7 @@ public class EvolutionaryAlgorithm {
     private CrossoverOperator crossoverOperator;
 
     public EvolutionaryAlgorithm(SelectionOperator selectionOperator, MutationOperator mutationOperator,
-            CrossoverOperator crossoverOperator) throws EvolutionaryAlgorithmException {
+                                 CrossoverOperator crossoverOperator) throws EvolutionaryAlgorithmException {
         if (selectionOperator == null || mutationOperator == null || crossoverOperator == null) {
             throw new EvolutionaryAlgorithmException("Argumentos nulos");
         }
@@ -43,10 +49,12 @@ public class EvolutionaryAlgorithm {
         this.crossoverOperator = crossoverOperator;
     }
 
-
-    public int[][] optimize(int[][] population) throws EvolutionaryAlgorithmException {
-
-        if (population != null && population.length  > 0 ) {
+    public int[][] optimize(int[][] p) throws EvolutionaryAlgorithmException {
+        int[][] population = p;
+        if (population != null && population.length > 0) {
+            if (population.length % 2 != 0) {
+                throw new EvolutionaryAlgorithmException("El tamaño de la población debe ser par");
+            }
             // Creamos una nueva población para los descendientes
             int[][] offspringPopulation = new int[population.length][population[0].length];
 
@@ -55,7 +63,7 @@ public class EvolutionaryAlgorithm {
                 // Seleccionamos dos individuos de la población actual
                 int[] parent1 = selectionOperator.select(population[i]);
                 int[] parent2 = selectionOperator.select(population[i + 1]);
-               
+
                 // Aplicamos el operador de cruce para generar dos descendientes
                 int[][] offspring = crossoverOperator.crossover(parent1, parent2);
                 offspringPopulation[i] = offspring[0];
