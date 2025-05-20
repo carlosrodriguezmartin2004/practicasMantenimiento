@@ -45,7 +45,7 @@ class MedicoTest extends AbstractIntegration {
     @Test
     @DisplayName("Registrar medico y recuperar sus datos")
     void guardarMedicoYConsultar() throws Exception {
-        Medico medico = this.createMedico(5L, "12345678X", "Carlos RM", "Mamografias");
+        Medico medico = this.createMedico(1L, "12345678X", "Carlos RM", "Mamografias");
 
         // Se realiza una solicitud para agregar un medico
         this.mockMvc.perform(post("/medico")
@@ -56,10 +56,10 @@ class MedicoTest extends AbstractIntegration {
 
         // Se consulta el medico agregado para verificar su existencia
 
-        MvcResult mvcResult = this.mockMvc.perform(get("/medico/5"))
+        MvcResult mvcResult = this.mockMvc.perform(get("/medico/1"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/json"))
-                .andExpect(jsonPath("$.id").value("5"))
+                .andExpect(jsonPath("$.id").value("1"))
                 .andExpect(jsonPath("$.dni").value("12345678X"))
                 .andExpect(jsonPath("$.especialidad").value("Mamografias"))
                 .andExpect(jsonPath("$.nombre").value("Carlos RM"))
@@ -72,7 +72,7 @@ class MedicoTest extends AbstractIntegration {
     @DisplayName("Actualizar datos del medico correctamente")
     void editarDatosDeMedico() throws Exception{
 
-        Medico medico = this.createMedico(5L, "12345678X", "Carlos RM", "Mamografias");
+        Medico medico = this.createMedico(1L, "12345678X", "Carlos RM", "Mamografias");
 
         // Se crea un nuevo registro para el medico
         this.mockMvc.perform(post("/medico")
@@ -94,10 +94,10 @@ class MedicoTest extends AbstractIntegration {
 
         // Se verifica que el cambio haya sido guardado
 
-        MvcResult mvcResult = this.mockMvc.perform(get("/medico/5"))
+        MvcResult mvcResult = this.mockMvc.perform(get("/medico/1"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/json"))
-                .andExpect(jsonPath("$.id").value("5"))
+                .andExpect(jsonPath("$.id").value("1"))
                 .andExpect(jsonPath("$.dni").value("12345678X"))
                 .andExpect(jsonPath("$.especialidad").value("Mamografias"))
                 .andExpect(jsonPath("$.nombre").value("Jose RP"))
@@ -110,7 +110,7 @@ class MedicoTest extends AbstractIntegration {
     @DisplayName("Eliminar medico y confirmar eliminacion")
     void eliminarMedicoYComprobar() throws Exception{
 
-        Medico medico = this.createMedico(5L, "12345678X", "Carlos RM", "Mamografias");
+        Medico medico = this.createMedico(1L, "12345678X", "Carlos RM", "Mamografias");
 
         // Se almacena el medico en la base de datos
         this.mockMvc.perform(post("/medico")
@@ -120,7 +120,7 @@ class MedicoTest extends AbstractIntegration {
                 .andExpect(status().is2xxSuccessful());
 
         // Se elimina el medico previamente insertado
-        this.mockMvc.perform(delete("/medico/5"))
+        this.mockMvc.perform(delete("/medico/1"))
                 .andExpect(status().is2xxSuccessful());
 
         // Se intenta recuperar el medico eliminado, lo cual deberia fallar
@@ -137,7 +137,7 @@ class MedicoTest extends AbstractIntegration {
     @DisplayName("Obtener medico mediante DNI")
     void consultarMedicoPorDNI() throws Exception{
 
-        Medico medico = this.createMedico(5L, "12345678X", "Carlos RM", "Mamografias");
+        Medico medico = this.createMedico(1L, "12345678X", "Carlos RM", "Mamografias");
 
         // Se guarda el medico en el sistema
         this.mockMvc.perform(post("/medico")
@@ -150,7 +150,7 @@ class MedicoTest extends AbstractIntegration {
         this.mockMvc.perform(get("/medico/dni/12345678X"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/json"))
-                .andExpect(jsonPath("$.id").value("5"))
+                .andExpect(jsonPath("$.id").value("1"))
                 .andExpect(jsonPath("$.dni").value("12345678X"))
                 .andExpect(jsonPath("$.especialidad").value("Mamografias"))
                 .andExpect(jsonPath("$.nombre").value("Carlos RM"));
