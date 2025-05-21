@@ -3,7 +3,6 @@ package com.uma.example.springuma.integration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.uma.example.springuma.model.Imagen;
-import com.uma.example.springuma.model.Medico;
 import com.uma.example.springuma.model.Paciente;
 import jakarta.annotation.PostConstruct;
 import org.junit.jupiter.api.DisplayName;
@@ -11,7 +10,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
-import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.MediaType;
@@ -26,7 +24,7 @@ import java.time.Duration;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class ImagenControllerMockMvcIT {
+public class ImagenControllerWebTestClientIT {
 
     @LocalServerPort
     private int port;
