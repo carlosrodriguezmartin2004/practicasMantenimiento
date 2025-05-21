@@ -1,3 +1,9 @@
+/*
+    GR Y
+    Carlos Rodríguez Martin
+    José Ruiz Pareja
+ */
+
 package com.uma.example.springuma.integration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;

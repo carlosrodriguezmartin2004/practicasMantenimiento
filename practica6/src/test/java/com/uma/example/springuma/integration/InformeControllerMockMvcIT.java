@@ -1,6 +1,11 @@
+/*
+    GR Y
+    Carlos Rodríguez Martin
+    José Ruiz Pareja
+ */
+
 package com.uma.example.springuma.integration;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.uma.example.springuma.model.Informe;
 import org.junit.jupiter.api.DisplayName;

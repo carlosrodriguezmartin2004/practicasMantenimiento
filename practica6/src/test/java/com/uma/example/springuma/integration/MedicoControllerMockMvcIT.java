@@ -1,6 +1,10 @@
+/*
+    GR Y
+    Carlos Rodríguez Martin
+    José Ruiz Pareja
+ */
+
 package com.uma.example.springuma.integration;
-import static org.hamcrest.Matchers.hasSize;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
