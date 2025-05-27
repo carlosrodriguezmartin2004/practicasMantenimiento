@@ -116,7 +116,9 @@ public class ClubDeportivoTest {
         ClubD.anyadirActividad(g5);
         String actividad = g1.getActividad();
         int expected = g1.getPlazas() - g1.getMatriculados() +  g5.getPlazas() - g5.getMatriculados();
+
         int actual = ClubD.plazasLibres(actividad);
+
         assertEquals(expected, actual);
     }
 

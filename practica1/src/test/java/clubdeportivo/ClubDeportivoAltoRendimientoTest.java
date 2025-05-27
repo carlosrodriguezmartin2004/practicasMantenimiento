@@ -208,6 +208,8 @@ public class ClubDeportivoAltoRendimientoTest {
         double expected = 0.0;
 
         double result = club.ingresos();
+
+
         assertEquals(result,expected);
     }
 

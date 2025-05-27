@@ -106,7 +106,9 @@ public class GrupoTest {
     public void getActividadTest() throws ClubException {
         String expected = "Padel";
         Grupo g1 = new Grupo("1111", expected, 12, 10, 15.0);
+
         String actual = g1.getActividad();
+
         assertEquals(expected, actual);
     }
 
@@ -199,7 +201,9 @@ public class GrupoTest {
         int n = 2;
         int expected = g.getMatriculados() + n;
         g.matricular(n);
+
         int actual = g.getMatriculados();
+
         assertEquals(expected, actual);
     }
 
